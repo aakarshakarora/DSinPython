@@ -43,3 +43,32 @@ class BinaryTree:
             lDepth = self.maxDepth(root.left)
             rDepth = self.maxDepth(root.right)
             return max(lDepth, rDepth) + 1
+
+    def iterativeMaxDepth(self, root):
+        stack = []
+        if root:
+            stack.append((1, root))
+        depth = 0
+        while stack:
+            current_depth, root = stack.pop()
+            if root:
+                depth = max(depth, current_depth)
+                stack.append((current_depth + 1, root.left))
+                stack.append((current_depth + 1, root.right))
+        return depth
+
+
+root = None
+b = BinaryTree()
+for ele in [2, 1, 33, 0, 25, 40, 11, 34, 7, 12, 36, 13]:
+    root = b.buildBT(root, ele)
+total = b.countNodes(root)
+print(total)
+print("Total number of leaf nodes in a given binary tree")
+leafcount = b.leafCount(root)
+print(leafcount)
+print('maximum depth of a binary tree')
+height = b.maxDepth(root)
+print(height)
+height1 = b.iterativeMaxDepth(root)
+print(height1)
